@@ -60,14 +60,14 @@
 
     /* ── Grid ── */
     main {
-      max-width: 1280px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 32px 16px 64px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
 
@@ -78,10 +78,14 @@
       overflow: hidden;
       box-shadow: 0 1px 4px rgba(0,0,0,.08);
       transition: transform .15s ease, box-shadow .15s ease;
+      cursor: pointer;
     }
     .card:hover {
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(0,0,0,.12);
+    }
+    .card:hover .zoom-hint {
+      opacity: 1;
     }
 
     .thumb-wrap {
@@ -89,6 +93,7 @@
       aspect-ratio: 3 / 2;
       background: #f0f0f0;
       overflow: hidden;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -98,6 +103,23 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform .2s ease;
+    }
+    .card:hover .thumb-wrap img {
+      transform: scale(1.03);
+    }
+    .zoom-hint {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0,0,0,.55);
+      color: #fff;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity .15s ease;
+      pointer-events: none;
     }
 
     .card-label {
@@ -119,6 +141,59 @@
       text-overflow: ellipsis;
     }
 
+    /* ── Lightbox ── */
+    #modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    #modal.open {
+      display: flex;
+    }
+    #modal-inner {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    #modal-img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 8px;
+      object-fit: contain;
+      box-shadow: 0 8px 40px rgba(0,0,0,.6);
+    }
+    #modal-label {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    #modal-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 18px;
+      line-height: 32px;
+      text-align: center;
+      cursor: pointer;
+      color: #222;
+      box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    }
+
     /* ── Footer ── */
     footer {
       text-align: center;
@@ -128,8 +203,11 @@
       border-top: 1px solid #e8e8e8;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 700px) {
       .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
+    @media (max-width: 400px) {
+      .grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -145,696 +223,782 @@
     Found one you love? Note the template number and send it to us! ✉
   </div>
 
+  <!-- Lightbox modal -->
+  <div id="modal" onclick="closeModal()">
+    <div id="modal-inner" onclick="event.stopPropagation()">
+      <button id="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+      <img id="modal-img" src="" alt="" />
+      <div id="modal-label"></div>
+    </div>
+  </div>
+
   <main>
     <div class="grid">
       
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-free-halloween-photo-booth-template.png', 'Private Party Collection — Template 1')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-free-halloween-photo-booth-template.png" alt="Private Party Collection — Template 1" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 1</span>
                 <span class="name">Free Halloween Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-beach-party-photo-booth-template.png', 'Private Party Collection — Template 2')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-beach-party-photo-booth-template.png" alt="Private Party Collection — Template 2" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 2</span>
                 <span class="name">Beach Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-iridescent-birthday-photo-booth-template.png', 'Private Party Collection — Template 3')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-iridescent-birthday-photo-booth-template.png" alt="Private Party Collection — Template 3" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 3</span>
                 <span class="name">Iridescent Birthday Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-birthday-party-photo-booth-template.png', 'Private Party Collection — Template 4')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-birthday-party-photo-booth-template.png" alt="Private Party Collection — Template 4" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 4</span>
                 <span class="name">Birthday Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-gold-balloon-birthday-party-photo-booth-template.png', 'Private Party Collection — Template 5')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-gold-balloon-birthday-party-photo-booth-template.png" alt="Private Party Collection — Template 5" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 5</span>
                 <span class="name">Gold Balloon Birthday Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-purple-birthday-photo-booth-template.png', 'Private Party Collection — Template 6')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-purple-birthday-photo-booth-template.png" alt="Private Party Collection — Template 6" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 6</span>
                 <span class="name">Purple Birthday Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-christmas-bauble-photo-booth-template.png', 'Private Party Collection — Template 7')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-christmas-bauble-photo-booth-template.png" alt="Private Party Collection — Template 7" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 7</span>
                 <span class="name">Christmas Bauble Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-black-gold-party-photo-booth-template.png', 'Private Party Collection — Template 8')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-black-gold-party-photo-booth-template.png" alt="Private Party Collection — Template 8" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 8</span>
                 <span class="name">Black Gold Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-summer-pool-party-photo-booth-template.png', 'Private Party Collection — Template 9')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-summer-pool-party-photo-booth-template.png" alt="Private Party Collection — Template 9" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 9</span>
                 <span class="name">Summer Pool Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-blue-pattern-wedding-photo-booth-template.png', 'Private Party Collection — Template 10')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-blue-pattern-wedding-photo-booth-template.png" alt="Private Party Collection — Template 10" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 10</span>
                 <span class="name">Blue Pattern Wedding Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-minimal-beach-ocean-photo-booth-template.png', 'Private Party Collection — Template 11')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-minimal-beach-ocean-photo-booth-template.png" alt="Private Party Collection — Template 11" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 11</span>
                 <span class="name">Minimal Beach / Ocean Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-blue-birthday-party-photo-booth-template.png', 'Private Party Collection — Template 12')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-blue-birthday-party-photo-booth-template.png" alt="Private Party Collection — Template 12" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 12</span>
                 <span class="name">Blue Birthday Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-conference-event-photo-booth-template.png', 'Private Party Collection — Template 13')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-conference-event-photo-booth-template.png" alt="Private Party Collection — Template 13" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 13</span>
                 <span class="name">Conference Event Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-crimson-garnet-wedding-photo-booth-template.png', 'Private Party Collection — Template 14')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-crimson-garnet-wedding-photo-booth-template.png" alt="Private Party Collection — Template 14" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 14</span>
                 <span class="name">Crimson Garnet Wedding Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-corporate-event-photo-booth-template.png', 'Private Party Collection — Template 15')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-corporate-event-photo-booth-template.png" alt="Private Party Collection — Template 15" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 15</span>
                 <span class="name">Corporate Event Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-green-wedding-photo-booth-template.png', 'Private Party Collection — Template 16')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-green-wedding-photo-booth-template.png" alt="Private Party Collection — Template 16" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 16</span>
                 <span class="name">Green Wedding Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-emerald-wedding-photo-booth-template.png', 'Private Party Collection — Template 17')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-emerald-wedding-photo-booth-template.png" alt="Private Party Collection — Template 17" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 17</span>
                 <span class="name">Emerald Wedding Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-moody-fall-wedding-photo-booth-template.png', 'Private Party Collection — Template 18')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-moody-fall-wedding-photo-booth-template.png" alt="Private Party Collection — Template 18" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 18</span>
                 <span class="name">Moody Fall Wedding Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-music-festival-photo-booth-template.png', 'Private Party Collection — Template 19')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-music-festival-photo-booth-template.png" alt="Private Party Collection — Template 19" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 19</span>
                 <span class="name">Music Festival Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-sport-player-trading-card-templates.png', 'Private Party Collection — Template 20')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-sport-player-trading-card-templates.png" alt="Private Party Collection — Template 20" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 20</span>
                 <span class="name">Sport Player Trading Card Templates</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-free-graduation-photo-booth-template.png', 'Private Party Collection — Template 21')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-free-graduation-photo-booth-template.png" alt="Private Party Collection — Template 21" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 21</span>
                 <span class="name">Free Graduation Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-diwali-photo-booth-template.png', 'Private Party Collection — Template 22')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-diwali-photo-booth-template.png" alt="Private Party Collection — Template 22" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 22</span>
                 <span class="name">Diwali Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-bronze-blue-photo-booth-template.png', 'Private Party Collection — Template 23')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-bronze-blue-photo-booth-template.png" alt="Private Party Collection — Template 23" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 23</span>
                 <span class="name">Bronze & Blue Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-corporate-photo-booth-template.png', 'Private Party Collection — Template 24')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-corporate-photo-booth-template.png" alt="Private Party Collection — Template 24" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 24</span>
                 <span class="name">Corporate Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-rust-orange-photo-booth-template.png', 'Private Party Collection — Template 25')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-rust-orange-photo-booth-template.png" alt="Private Party Collection — Template 25" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 25</span>
                 <span class="name">Rust Orange Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-free-summer-party-photo-booth-template.png', 'Private Party Collection — Template 26')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-free-summer-party-photo-booth-template.png" alt="Private Party Collection — Template 26" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 26</span>
                 <span class="name">Free Summer Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-neon-nights-party-photo-booth-template.png', 'Private Party Collection — Template 27')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-neon-nights-party-photo-booth-template.png" alt="Private Party Collection — Template 27" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 27</span>
                 <span class="name">Neon Nights Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-80s-night-photo-booth-template.png', 'Private Party Collection — Template 28')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-80s-night-photo-booth-template.png" alt="Private Party Collection — Template 28" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 28</span>
                 <span class="name">80s Night Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-baseball-bash-trading-card-template.png', 'Private Party Collection — Template 29')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-baseball-bash-trading-card-template.png" alt="Private Party Collection — Template 29" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 29</span>
                 <span class="name">Baseball Bash Trading Card Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-summer-sunset-photo-booth-template.png', 'Private Party Collection — Template 30')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-summer-sunset-photo-booth-template.png" alt="Private Party Collection — Template 30" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 30</span>
                 <span class="name">Summer Sunset Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-st-patricks-day-photo-booth-template.png', 'Private Party Collection — Template 31')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/summer-party/summer-party-st-patricks-day-photo-booth-template.png" alt="Private Party Collection — Template 31" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 31</span>
                 <span class="name">St Patrick’s Day Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-birthday-photo-booth-templates.png', 'Private Party Collection — Template 32')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-birthday-photo-booth-templates.png" alt="Private Party Collection — Template 32" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 32</span>
                 <span class="name">Birthday Photo Booth Templates</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-elegant-red-glitter-birthday-party-photo-booth-template.png', 'Private Party Collection — Template 33')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-elegant-red-glitter-birthday-party-photo-booth-template.png" alt="Private Party Collection — Template 33" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 33</span>
                 <span class="name">Elegant Red Glitter Birthday Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-pirates-photo-booth-template.png', 'Private Party Collection — Template 34')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-pirates-photo-booth-template.png" alt="Private Party Collection — Template 34" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 34</span>
                 <span class="name">Pirates Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-frozen-birthday-photo-booth-template.png', 'Private Party Collection — Template 35')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-frozen-birthday-photo-booth-template.png" alt="Private Party Collection — Template 35" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 35</span>
                 <span class="name">Frozen Birthday Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-30th-birthday-photo-booth-template.png', 'Private Party Collection — Template 36')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-30th-birthday-photo-booth-template.png" alt="Private Party Collection — Template 36" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 36</span>
                 <span class="name">30th Birthday Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-18th-birthday-photo-booth-template.png', 'Private Party Collection — Template 37')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-18th-birthday-photo-booth-template.png" alt="Private Party Collection — Template 37" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 37</span>
                 <span class="name">18th Birthday Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-after-party-photo-booth-template.png', 'Private Party Collection — Template 38')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-after-party-photo-booth-template.png" alt="Private Party Collection — Template 38" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 38</span>
                 <span class="name">After Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-rose-gold-photo-booth-template.png', 'Private Party Collection — Template 39')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-rose-gold-photo-booth-template.png" alt="Private Party Collection — Template 39" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 39</span>
                 <span class="name">Rose Gold Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-marble-photo-booth-template.png', 'Private Party Collection — Template 40')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-marble-photo-booth-template.png" alt="Private Party Collection — Template 40" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 40</span>
                 <span class="name">Marble Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-sweet-16-photo-booth-template.png', 'Private Party Collection — Template 41')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-sweet-16-photo-booth-template.png" alt="Private Party Collection — Template 41" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 41</span>
                 <span class="name">Sweet 16 Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-green-gold-art-deco-photo-booth-template.png', 'Private Party Collection — Template 42')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-green-gold-art-deco-photo-booth-template.png" alt="Private Party Collection — Template 42" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 42</span>
                 <span class="name">Green & Gold Art Deco Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-60th-birthday-photo-booth-template.png', 'Private Party Collection — Template 43')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-60th-birthday-photo-booth-template.png" alt="Private Party Collection — Template 43" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 43</span>
                 <span class="name">60th Birthday Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-black-gold-glitter-photo-booth-template.png', 'Private Party Collection — Template 44')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/birthday/birthday-black-gold-glitter-photo-booth-template.png" alt="Private Party Collection — Template 44" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 44</span>
                 <span class="name">Black & Gold Glitter Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-photo-booth-templates.png', 'Private Party Collection — Template 45')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-photo-booth-templates.png" alt="Private Party Collection — Template 45" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 45</span>
                 <span class="name">Halloween Photo Booth Templates</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-party-photo-booth-template.png', 'Private Party Collection — Template 46')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-party-photo-booth-template.png" alt="Private Party Collection — Template 46" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 46</span>
                 <span class="name">Halloween Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-spooky-night-photo-booth-template-v2.png', 'Private Party Collection — Template 47')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-spooky-night-photo-booth-template-v2.png" alt="Private Party Collection — Template 47" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 47</span>
                 <span class="name">Halloween Spooky Night Photo Booth Template v2</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-graveyard-photo-booth-template.png', 'Private Party Collection — Template 48')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-graveyard-photo-booth-template.png" alt="Private Party Collection — Template 48" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 48</span>
                 <span class="name">Halloween Graveyard Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-fear-photo-booth-template.png', 'Private Party Collection — Template 49')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-fear-photo-booth-template.png" alt="Private Party Collection — Template 49" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 49</span>
                 <span class="name">Halloween Fear Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-pumpkin-patch-photo-booth-template.png', 'Private Party Collection — Template 50')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-pumpkin-patch-photo-booth-template.png" alt="Private Party Collection — Template 50" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 50</span>
                 <span class="name">Halloween Pumpkin Patch Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-zombies-photo-booth-template.png', 'Private Party Collection — Template 51')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-zombies-photo-booth-template.png" alt="Private Party Collection — Template 51" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 51</span>
                 <span class="name">Halloween Zombies Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-witches-ball-photo-booth-template.png', 'Private Party Collection — Template 52')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-witches-ball-photo-booth-template.png" alt="Private Party Collection — Template 52" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 52</span>
                 <span class="name">Halloween Witches Ball Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-zombie-photo-booth-template.png', 'Private Party Collection — Template 53')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-zombie-photo-booth-template.png" alt="Private Party Collection — Template 53" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 53</span>
                 <span class="name">Halloween Zombie Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-monster-photo-booth-template.png', 'Private Party Collection — Template 54')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-monster-photo-booth-template.png" alt="Private Party Collection — Template 54" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 54</span>
                 <span class="name">Halloween Monster Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-photo-booth-template.png', 'Private Party Collection — Template 55')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-photo-booth-template.png" alt="Private Party Collection — Template 55" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 55</span>
                 <span class="name">Halloween Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-trick-or-treat-photo-booth-template.png', 'Private Party Collection — Template 56')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-trick-or-treat-photo-booth-template.png" alt="Private Party Collection — Template 56" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 56</span>
                 <span class="name">Halloween Trick or Treat Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-free-kids-halloween-photo-booth-template.png', 'Private Party Collection — Template 57')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-free-kids-halloween-photo-booth-template.png" alt="Private Party Collection — Template 57" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 57</span>
                 <span class="name">Free Kids Halloween Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-full-moon-photo-booth-template.png', 'Private Party Collection — Template 58')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-full-moon-photo-booth-template.png" alt="Private Party Collection — Template 58" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 58</span>
                 <span class="name">Halloween Full Moon Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-horror-night-party-photo-booth-template.png', 'Private Party Collection — Template 59')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-horror-night-party-photo-booth-template.png" alt="Private Party Collection — Template 59" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 59</span>
                 <span class="name">Horror Night Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-minimalist-halloween-photo-booth-template.png', 'Private Party Collection — Template 60')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-minimalist-halloween-photo-booth-template.png" alt="Private Party Collection — Template 60" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 60</span>
                 <span class="name">Minimalist Halloween Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-haunted-halloween-photo-booth-template.png', 'Private Party Collection — Template 61')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-haunted-halloween-photo-booth-template.png" alt="Private Party Collection — Template 61" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 61</span>
                 <span class="name">Haunted Halloween Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-scary-night-photo-booth-template.png', 'Private Party Collection — Template 62')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-scary-night-photo-booth-template.png" alt="Private Party Collection — Template 62" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 62</span>
                 <span class="name">Halloween Scary Night Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-skulls-photo-booth-template.png', 'Private Party Collection — Template 63')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-skulls-photo-booth-template.png" alt="Private Party Collection — Template 63" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 63</span>
                 <span class="name">Halloween Skulls Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-blood-photo-booth-template.png', 'Private Party Collection — Template 64')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/halloween/halloween-halloween-blood-photo-booth-template.png" alt="Private Party Collection — Template 64" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 64</span>
                 <span class="name">Halloween Blood Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/new-years-eve/new-years-eve-photo-booth-templates-for-canva-dslr-booth-lumabooth-darkroom-booth-adobe-photoshop.png', 'Private Party Collection — Template 65')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/new-years-eve/new-years-eve-photo-booth-templates-for-canva-dslr-booth-lumabooth-darkroom-booth-adobe-photoshop.png" alt="Private Party Collection — Template 65" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 65</span>
                 <span class="name">Photo Booth Templates for Canva, DSLR Booth, LumaBooth, Darkroom Booth & Adobe Photoshop</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-graduation-photo-booth-templates.png', 'Private Party Collection — Template 66')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-graduation-photo-booth-templates.png" alt="Private Party Collection — Template 66" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 66</span>
                 <span class="name">Graduation Photo Booth Templates</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-prom-night-photo-booth-template.png', 'Private Party Collection — Template 67')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-prom-night-photo-booth-template.png" alt="Private Party Collection — Template 67" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 67</span>
                 <span class="name">Prom Night Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-gold-green-prom-night-photo-booth-template.png', 'Private Party Collection — Template 68')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-gold-green-prom-night-photo-booth-template.png" alt="Private Party Collection — Template 68" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 68</span>
                 <span class="name">Gold & Green Prom Night Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-prom-night-party-photo-booth-template.png', 'Private Party Collection — Template 69')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-prom-night-party-photo-booth-template.png" alt="Private Party Collection — Template 69" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 69</span>
                 <span class="name">Prom Night Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-glitter-red-prom-night-photo-booth-template.png', 'Private Party Collection — Template 70')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-glitter-red-prom-night-photo-booth-template.png" alt="Private Party Collection — Template 70" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 70</span>
                 <span class="name">Glitter Red Prom Night Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-sparkly-purple-prom-photo-booth-template.png', 'Private Party Collection — Template 71')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-sparkly-purple-prom-photo-booth-template.png" alt="Private Party Collection — Template 71" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 71</span>
                 <span class="name">Sparkly Purple Prom Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-modern-graduation-photo-booth-template.png', 'Private Party Collection — Template 72')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-modern-graduation-photo-booth-template.png" alt="Private Party Collection — Template 72" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 72</span>
                 <span class="name">Modern Graduation Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-graduation-photo-booth-template.png', 'Private Party Collection — Template 73')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-graduation-photo-booth-template.png" alt="Private Party Collection — Template 73" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 73</span>
                 <span class="name">Graduation Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-graduation-ticket-photo-booth-template.png', 'Private Party Collection — Template 74')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-graduation-ticket-photo-booth-template.png" alt="Private Party Collection — Template 74" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 74</span>
                 <span class="name">Graduation Ticket Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-graduation-party-photo-booth-template.png', 'Private Party Collection — Template 75')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-graduation-party-photo-booth-template.png" alt="Private Party Collection — Template 75" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 75</span>
                 <span class="name">Graduation Party Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-graduation-celebration-photo-booth-template.png', 'Private Party Collection — Template 76')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-graduation-celebration-photo-booth-template.png" alt="Private Party Collection — Template 76" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 76</span>
                 <span class="name">Graduation Celebration Photo Booth Template</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="openModal('https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-free-prom-photo-booth-template.png', 'Private Party Collection — Template 77')" role="button" tabindex="0">
             <div class="thumb-wrap">
                 <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/graduation/graduation-free-prom-photo-booth-template.png" alt="Private Party Collection — Template 77" loading="lazy" />
+                <div class="zoom-hint">Click to enlarge</div>
             </div>
             <div class="card-label">
                 <span class="num">Template 77</span>
@@ -847,6 +1011,23 @@
   <footer>
     &copy; Epic Booth · All templates provided by TemplatesBooth.com
   </footer>
+
+  <script>
+    function openModal(src, label) {
+      document.getElementById('modal-img').src = src;
+      document.getElementById('modal-label').textContent = label;
+      document.getElementById('modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('modal').classList.remove('open');
+      document.getElementById('modal-img').src = '';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
 
 </body>
 </html>
