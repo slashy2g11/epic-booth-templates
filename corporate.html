@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Epic Booth — Corporate Collection</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f7fa;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 32px 24px 28px;
+      text-align: center;
+    }
+    header .brand {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      font-size: clamp(22px, 5vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+    header h1 span {
+      color: #1a3a5c;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #bbb;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* ── CTA banner ── */
+    .cta {
+      background: #1a3a5c;
+      color: #fff;
+      text-align: center;
+      padding: 12px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Grid ── */
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.12);
+    }
+
+    .thumb-wrap {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      background: #f0f0f0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-label {
+      padding: 10px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .num {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a3a5c;
+    }
+    .name {
+      font-size: 12px;
+      color: #666;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: #aaa;
+      border-top: 1px solid #e8e8e8;
+    }
+
+    @media (max-width: 480px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">Epic Booth</div>
+    <h1>Epic Booth — <span>Corporate Collection</span></h1>
+    <p>Browse our corporate templates and pick your favourite. Share the number with us when you're ready.</p>
+  </header>
+
+  <div class="cta">
+    Found one you love? Note the template number and send it to us! ✉
+  </div>
+
+  <main>
+    <div class="grid">
+      
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-free-christmas-photo-booth-template.png" alt="Corporate Collection — Template 1" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 1</span>
+                <span class="name">Free Christmas Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-beach-party-photo-booth-template.png" alt="Corporate Collection — Template 2" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 2</span>
+                <span class="name">Beach Party Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-iridescent-birthday-photo-booth-template.png" alt="Corporate Collection — Template 3" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 3</span>
+                <span class="name">Iridescent Birthday Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-birthday-party-photo-booth-template.png" alt="Corporate Collection — Template 4" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 4</span>
+                <span class="name">Birthday Party Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-gold-balloon-birthday-party-photo-booth-template.png" alt="Corporate Collection — Template 5" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 5</span>
+                <span class="name">Gold Balloon Birthday Party Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-purple-birthday-photo-booth-template.png" alt="Corporate Collection — Template 6" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 6</span>
+                <span class="name">Purple Birthday Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-country-nights-photo-booth-template.png" alt="Corporate Collection — Template 7" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 7</span>
+                <span class="name">Country Nights Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-country-and-western-photo-booth-template.png" alt="Corporate Collection — Template 8" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 8</span>
+                <span class="name">Country and Western Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-golden-rings-photo-booth-template.png" alt="Corporate Collection — Template 9" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 9</span>
+                <span class="name">Golden Rings Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-tiffany-blue-photo-booth-template.png" alt="Corporate Collection — Template 10" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 10</span>
+                <span class="name">Tiffany Blue Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-blue-birthday-party-photo-booth-template.png" alt="Corporate Collection — Template 11" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 11</span>
+                <span class="name">Blue Birthday Party Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-conference-event-photo-booth-template.png" alt="Corporate Collection — Template 12" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 12</span>
+                <span class="name">Conference Event Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-crimson-garnet-wedding-photo-booth-template.png" alt="Corporate Collection — Template 13" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 13</span>
+                <span class="name">Crimson Garnet Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-corporate-event-photo-booth-template.png" alt="Corporate Collection — Template 14" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 14</span>
+                <span class="name">Corporate Event Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-black-gold-party-photo-booth-template.png" alt="Corporate Collection — Template 15" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 15</span>
+                <span class="name">Black Gold Party Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-green-wedding-photo-booth-template.png" alt="Corporate Collection — Template 16" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 16</span>
+                <span class="name">Green Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-emerald-wedding-photo-booth-template.png" alt="Corporate Collection — Template 17" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 17</span>
+                <span class="name">Emerald Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-moody-fall-wedding-photo-booth-template.png" alt="Corporate Collection — Template 18" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 18</span>
+                <span class="name">Moody Fall Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-music-festival-photo-booth-template.png" alt="Corporate Collection — Template 19" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 19</span>
+                <span class="name">Music Festival Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/nightclub/nightclub-free-nightclub-photo-booth-template.png" alt="Corporate Collection — Template 20" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 20</span>
+                <span class="name">Free Nightclub Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/nightclub/nightclub-black-pink-gala-night-photo-booth-template.png" alt="Corporate Collection — Template 21" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 21</span>
+                <span class="name">Black & Pink Gala Night Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/nightclub/nightclub-new-years-eve-gala-photo-booth-template.png" alt="Corporate Collection — Template 22" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 22</span>
+                <span class="name">New Year’s Eve Gala Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/nightclub/nightclub-hanukkah-photo-booth-template.png" alt="Corporate Collection — Template 23" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 23</span>
+                <span class="name">Hanukkah Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/nightclub/nightclub-60th-birthday-photo-booth-template.png" alt="Corporate Collection — Template 24" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 24</span>
+                <span class="name">60th Birthday Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-christmas-photo-booth-templates.png" alt="Corporate Collection — Template 25" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 25</span>
+                <span class="name">Christmas Photo Booth Templates</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-christmas-nativity-photo-booth-template.png" alt="Corporate Collection — Template 26" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 26</span>
+                <span class="name">Christmas Nativity Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-green-gold-christmas-photo-booth-template.png" alt="Corporate Collection — Template 27" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 27</span>
+                <span class="name">Green & Gold Christmas Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-black-santas-grotto-photo-booth-template.png" alt="Corporate Collection — Template 28" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 28</span>
+                <span class="name">Black Santa’s Grotto Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-modern-christmas-party-photo-booth-template.png" alt="Corporate Collection — Template 29" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 29</span>
+                <span class="name">Modern Christmas Party Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-christmas-ticket-photo-booth-template.png" alt="Corporate Collection — Template 30" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 30</span>
+                <span class="name">Christmas Ticket Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-christmas-bow-photo-booth-template.png" alt="Corporate Collection — Template 31" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 31</span>
+                <span class="name">Christmas Bow Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-abstract-christmas-party-photo-booth-template.png" alt="Corporate Collection — Template 32" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 32</span>
+                <span class="name">Abstract Christmas Party Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-christmas-plaid-photo-booth-template.png" alt="Corporate Collection — Template 33" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 33</span>
+                <span class="name">Christmas Plaid Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-christmas-postcard-photo-booth-template.png" alt="Corporate Collection — Template 34" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 34</span>
+                <span class="name">Christmas Postcard Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-contemporary-christmas-photo-booth-template.png" alt="Corporate Collection — Template 35" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 35</span>
+                <span class="name">Contemporary Christmas Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-blue-gold-christmas-photo-booth-template.png" alt="Corporate Collection — Template 36" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 36</span>
+                <span class="name">Blue & Gold Christmas Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-merry-christmas-photo-booth-template.png" alt="Corporate Collection — Template 37" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 37</span>
+                <span class="name">Merry Christmas Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-classic-christmas-photo-booth-template.png" alt="Corporate Collection — Template 38" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 38</span>
+                <span class="name">Classic Christmas Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-christmas-party-photo-booth-template.png" alt="Corporate Collection — Template 39" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 39</span>
+                <span class="name">Christmas Party Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-christmas-ugly-sweater-photo-booth-template.png" alt="Corporate Collection — Template 40" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 40</span>
+                <span class="name">Christmas Ugly Sweater Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-christmas-workshop-photo-booth-template.png" alt="Corporate Collection — Template 41" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 41</span>
+                <span class="name">Christmas Workshop Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-bad-santa-christmas-photo-booth-template.png" alt="Corporate Collection — Template 42" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 42</span>
+                <span class="name">Bad Santa Christmas Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-santas-grotto-photo-booth-template.png" alt="Corporate Collection — Template 43" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 43</span>
+                <span class="name">Santa’s Grotto Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/christmas/christmas-christmas-tree-photo-booth-template.png" alt="Corporate Collection — Template 44" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 44</span>
+                <span class="name">Christmas Tree Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-minimalist-photo-booth-templates.png" alt="Corporate Collection — Template 45" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 45</span>
+                <span class="name">Minimalist Photo Booth Templates</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-minimalist-wedding-photo-booth-template.png" alt="Corporate Collection — Template 46" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 46</span>
+                <span class="name">Minimalist Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-minimalist-new-year-photo-booth-template.png" alt="Corporate Collection — Template 47" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 47</span>
+                <span class="name">Minimalist New Year Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-simple-minimal-photo-booth-template-vol4.png" alt="Corporate Collection — Template 48" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 48</span>
+                <span class="name">Simple Minimal Photo Booth Template Vol.4</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-minimal-wedding-photo-booth-template.png" alt="Corporate Collection — Template 49" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 49</span>
+                <span class="name">Minimal Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-simple-minimal-photo-booth-template-vol2.png" alt="Corporate Collection — Template 50" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 50</span>
+                <span class="name">Simple Minimal Photo Booth Template Vol.2</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-simple-minimal-photo-booth-template-vol1.png" alt="Corporate Collection — Template 51" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 51</span>
+                <span class="name">Simple Minimal Photo Booth Template Vol.1</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-sleek-minimalist-photo-booth-template.png" alt="Corporate Collection — Template 52" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 52</span>
+                <span class="name">Sleek Minimalist Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-off-white-wedding-photo-booth-template.png" alt="Corporate Collection — Template 53" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 53</span>
+                <span class="name">Off-White Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-champagne-wedding-photo-booth-template.png" alt="Corporate Collection — Template 54" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 54</span>
+                <span class="name">Champagne Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-minimalist-black-white-photo-booth-template.png" alt="Corporate Collection — Template 55" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 55</span>
+                <span class="name">Minimalist Black & White Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-minimal-blue-photo-booth-template.png" alt="Corporate Collection — Template 56" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 56</span>
+                <span class="name">Minimal Blue Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-typographic-wedding-magazine-photo-booth-template.png" alt="Corporate Collection — Template 57" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 57</span>
+                <span class="name">Typographic Wedding Magazine Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-minimal-baby-shower-photo-booth-template.png" alt="Corporate Collection — Template 58" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 58</span>
+                <span class="name">Minimal Baby Shower Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-typographic-photo-booth-template-v2.png" alt="Corporate Collection — Template 59" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 59</span>
+                <span class="name">Typographic Photo Booth Template V2</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-typographic-photo-booth-template.png" alt="Corporate Collection — Template 60" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 60</span>
+                <span class="name">Typographic Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-minimalist-typography-photo-booth-template.png" alt="Corporate Collection — Template 61" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 61</span>
+                <span class="name">Minimalist Typography Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-minimalist-wedding-photo-booth-template-v4.png" alt="Corporate Collection — Template 62" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 62</span>
+                <span class="name">Minimalist Wedding Photo Booth Template V4</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-graceful-wedding-photo-booth-template.png" alt="Corporate Collection — Template 63" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 63</span>
+                <span class="name">Graceful Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/minimalist/minimalist-minimalist-lovers-photo-booth-template.png" alt="Corporate Collection — Template 64" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 64</span>
+                <span class="name">Minimalist Lovers Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/nightclub/nightclub-photo-booth-templates-for-canva-dslr-booth-lumabooth-darkroom-booth-adobe-photoshop.png" alt="Corporate Collection — Template 65" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 65</span>
+                <span class="name">Photo Booth Templates for Canva, DSLR Booth, LumaBooth, Darkroom Booth & Adobe Photoshop</span>
+            </div>
+        </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; Epic Booth · All templates provided by TemplatesBooth.com
+  </footer>
+
+</body>
+</html>

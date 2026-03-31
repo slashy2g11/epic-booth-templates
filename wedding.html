@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Epic Booth — Wedding Collection</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #fdfaf5;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 32px 24px 28px;
+      text-align: center;
+    }
+    header .brand {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      font-size: clamp(22px, 5vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+    header h1 span {
+      color: #b8860b;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #bbb;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* ── CTA banner ── */
+    .cta {
+      background: #b8860b;
+      color: #fff;
+      text-align: center;
+      padding: 12px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Grid ── */
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.12);
+    }
+
+    .thumb-wrap {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      background: #f0f0f0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-label {
+      padding: 10px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .num {
+      font-size: 13px;
+      font-weight: 700;
+      color: #b8860b;
+    }
+    .name {
+      font-size: 12px;
+      color: #666;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: #aaa;
+      border-top: 1px solid #e8e8e8;
+    }
+
+    @media (max-width: 480px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">Epic Booth</div>
+    <h1>Epic Booth — <span>Wedding Collection</span></h1>
+    <p>Browse our wedding templates and pick your favourite. Share the number with us when you're ready.</p>
+  </header>
+
+  <div class="cta">
+    Found one you love? Note the template number and send it to us! ✉
+  </div>
+
+  <main>
+    <div class="grid">
+      
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-wedding-photo-booth-templates.png" alt="Wedding Collection — Template 1" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 1</span>
+                <span class="name">Wedding Photo Booth Templates</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-emerald-wedding-photo-booth-template.png" alt="Wedding Collection — Template 2" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 2</span>
+                <span class="name">Emerald Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-moody-fall-wedding-photo-booth-template.png" alt="Wedding Collection — Template 3" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 3</span>
+                <span class="name">Moody Fall Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-indian-gold-wedding-photo-booth-template.png" alt="Wedding Collection — Template 4" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 4</span>
+                <span class="name">Indian Gold Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-refined-wedding-magazine-photo-booth-template.png" alt="Wedding Collection — Template 5" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 5</span>
+                <span class="name">Refined Wedding Magazine Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-earthy-boho-wedding-photo-booth-template.png" alt="Wedding Collection — Template 6" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 6</span>
+                <span class="name">Earthy Boho Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-lemon-blue-wedding-photo-booth-template.png" alt="Wedding Collection — Template 7" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 7</span>
+                <span class="name">Lemon Blue Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-vibrant-pink-wedding-photo-booth-template.png" alt="Wedding Collection — Template 8" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 8</span>
+                <span class="name">Vibrant Pink Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-bold-boho-wedding-photo-booth-template.png" alt="Wedding Collection — Template 9" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 9</span>
+                <span class="name">Bold Boho Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-soft-green-wedding-photo-booth-template.png" alt="Wedding Collection — Template 10" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 10</span>
+                <span class="name">Soft Green Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-moody-black-wedding-photo-booth-template.png" alt="Wedding Collection — Template 11" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 11</span>
+                <span class="name">Moody Black Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-minimal-beach-ocean-photo-booth-template.png" alt="Wedding Collection — Template 12" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 12</span>
+                <span class="name">Minimal Beach / Ocean Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-rustic-wedding-photo-booth-template.png" alt="Wedding Collection — Template 13" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 13</span>
+                <span class="name">Rustic Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-bronze-blue-wedding-photo-booth-template.png" alt="Wedding Collection — Template 14" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 14</span>
+                <span class="name">Bronze & Blue Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-stone-blue-wedding-photo-booth-template.png" alt="Wedding Collection — Template 15" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 15</span>
+                <span class="name">Stone Blue Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-wedding-magazine-photo-booth-template.png" alt="Wedding Collection — Template 16" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 16</span>
+                <span class="name">Wedding Magazine Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-rustic-barn-wedding-photo-booth-template.png" alt="Wedding Collection — Template 17" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 17</span>
+                <span class="name">Rustic Barn Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-warm-boho-wedding-photo-booth-template.png" alt="Wedding Collection — Template 18" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 18</span>
+                <span class="name">Warm Boho Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-pastel-floral-wedding-photo-booth-template.png" alt="Wedding Collection — Template 19" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 19</span>
+                <span class="name">Pastel Floral Wedding Photo Booth Template</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumb-wrap">
+                <img src="https://jwnvktpmyopahwexiosz.supabase.co/storage/v1/object/public/captures/templates/wedding/wedding-minimalist-wedding-photo-booth-template.png" alt="Wedding Collection — Template 20" loading="lazy" />
+            </div>
+            <div class="card-label">
+                <span class="num">Template 20</span>
+                <span class="name">Minimalist Wedding Photo Booth Template</span>
+            </div>
+        </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; Epic Booth · All templates provided by TemplatesBooth.com
+  </footer>
+
+</body>
+</html>
